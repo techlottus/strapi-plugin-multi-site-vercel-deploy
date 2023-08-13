@@ -1,7 +1,7 @@
 # Vercel Deploy
 
-[![npm version](https://badge.fury.io/js/strapi-plugin-vercel-deploy.svg)](https://badge.fury.io/js/strapi-plugin-vercel-deploy)
-[![strapi market link](https://img.shields.io/badge/strapi-v4-blueviolet)](https://market.strapi.io/plugins/strapi-plugin-vercel-deploy)
+<!-- [![npm version](https://badge.fury.io/js/strapi-plugin-vercel-deploy.svg)](https://badge.fury.io/js/strapi-plugin-vercel-deploy)
+[![strapi market link](https://img.shields.io/badge/strapi-v4-blueviolet)](https://market.strapi.io/plugins/strapi-plugin-vercel-deploy) -->
 
 Strapi v4 plugin to trigger and monitor a deployment on Vercel.
 
@@ -13,9 +13,9 @@ Home Page:
 
 ![Plugin Home Page](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-home.png "Plugin Home Page")
 
-Settings Page:
+<!-- Settings Page:
 
-![Plugin Settings Page](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-settings.png "Plugin Settings Page")
+![Plugin Settings Page](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-settings.png "Plugin Settings Page") -->
 
 ## Installation
 
@@ -24,9 +24,9 @@ Settings Page:
 Run the following command in your Strapi project to install vercel-deploy:
 
 ```shell
-yarn add strapi-plugin-vercel-deploy
+yarn add strapi-plugin-multi-site-vercel-deploy
 # or
-npm i -S strapi-plugin-vercel-deploy
+npm i -S strapi-plugin-multi-site-vercel-deploy
 ```
 
 ### Enable plugin configuration
@@ -35,7 +35,7 @@ Open `config/plugins.js` file and add the vercel-deploy entry:
 
 ```js
 module.exports = ({ env }) => ({
-  "vercel-deploy": {
+  "multi-site-vercel-deploy": {
     enabled: true,
   },
 });
@@ -66,12 +66,17 @@ module.exports = ({ env }) => ({
   "vercel-deploy": {
     enabled: true,
     config: {
-      deployHook:
-        "https://api.vercel.com/v1/integrations/deploy/prj_<deploy-hook>",
-      apiToken: "<vercel-api-token>",
-      appFilter: "your-app-name-on-vercel",
-      teamFilter: "your-team-id-on-vercel",
-      roles: ["strapi-super-admin", "strapi-editor", "strapi-author"],
+      sites: [
+        {
+          deployHook:
+            "https://api.vercel.com/v1/integrations/deploy/prj_<deploy-hook>",
+          apiToken: "<vercel-api-token>",
+          appFilter: "your-app-name-on-vercel",
+          teamFilter: "your-team-id-on-vercel",
+          displayName: "app-name-to-be-displayed-in-dropdown",
+          roles: ["strapi-super-admin", "strapi-editor", "strapi-author"],
+        },
+      ],
     },
   },
 });
@@ -108,11 +113,16 @@ module.exports = ({ env }) => ({
   "vercel-deploy": {
     enabled: true,
     config: {
-      deployHook: process.env.VERCEL_DEPLOY_PLUGIN_HOOK,
-      apiToken: process.env.VERCEL_DEPLOY_PLUGIN_API_TOKEN,
-      appFilter: process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER,
-      teamFilter: process.env.VERCEL_DEPLOY_PLUGIN_TEAM_FILTER,
-      roles: ["strapi-super-admin"],
+      sites: [
+        {
+          deployHook: process.env.VERCEL_DEPLOY_PLUGIN_HOOK,
+          apiToken: process.env.VERCEL_DEPLOY_PLUGIN_API_TOKEN,
+          appFilter: process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER,
+          teamFilter: process.env.VERCEL_DEPLOY_PLUGIN_TEAM_FILTER,
+          displayName: process.env.VERCEL_DEPLOY_PLUGIN_DISPLAY_NAME,
+          roles: ["strapi-super-admin"],
+        },
+      ],
     },
   },
 });
@@ -128,6 +138,6 @@ VERCEL_DEPLOY_PLUGIN_API_TOKEN="<vercel-api-token>"
 VERCEL_DEPLOY_PLUGIN_APP_FILTER="your-app-name-on-vercel"
 ```
 
-#### Server
+## Credits
 
-You can save these values as process env variable on your server (e.g. [this](https://devcenter.heroku.com/articles/config-vars) guide is for Heroku).
+Thanks to [gianlucaparadise](https://github.com/gianlucaparadise) for making [strapi-plugin-vercel-deploy](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy) which this was based on.
