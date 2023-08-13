@@ -23,11 +23,15 @@ import { useFormattedMessage } from "../../hooks/useFormattedMessage";
  * @param {Props} props
  * @returns {JSX.Element}
  */
-const DeploymentsContainer = ({ usePolling, onDeploymentsFetched }) => {
+const DeploymentsContainer = ({
+  selectedSite,
+  usePolling,
+  onDeploymentsFetched,
+}) => {
   const labelLoader = useFormattedMessage("deployments-container.loader");
 
   const [isLoadingDeployments, deployments, hasDeploymentsError] =
-    useDeployments(usePolling, onDeploymentsFetched);
+    useDeployments(selectedSite, usePolling, onDeploymentsFetched);
 
   const hasEmptyDeployments = !deployments || deployments?.length <= 0;
 
@@ -47,7 +51,16 @@ const DeploymentsContainer = ({ usePolling, onDeploymentsFetched }) => {
     return <DeploymentsEmptyState type="MISSING_DEPLOYMENTS" />;
   }
 
-  return <DeploymentsList deployments={deployments} usePolling={usePolling} />;
+  return (
+    <>
+      {selectedSite ? (
+        <Box paddingBottom={4}>
+          <Typography variant="beta">{selectedSite.displayName}</Typography>
+        </Box>
+      ) : null}
+      <DeploymentsList deployments={deployments} usePolling={usePolling} />;
+    </>
+  );
 };
 
 export default DeploymentsContainer;

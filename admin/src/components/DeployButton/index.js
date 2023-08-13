@@ -57,6 +57,7 @@ const getDeployErrorState = (
  * @returns {JSX.Element}
  */
 const DeployButton = ({
+  selectedSite,
   availabilityApiError,
   runDeployAvailability,
   onDeployed,
@@ -87,7 +88,7 @@ const DeployButton = ({
     try {
       setHasDeployError(false);
       setIsLoading(true);
-      const response = await runDeploy();
+      await runDeploy(selectedSite);
       if (onDeployed) onDeployed(false);
     } catch (error) {
       console.error("[vercel-deploy] Error while running deploy", error);

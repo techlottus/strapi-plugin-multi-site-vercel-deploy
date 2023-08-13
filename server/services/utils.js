@@ -15,14 +15,18 @@ const buildConfig = (strapi, hideSensitiveInfo = false) => {
   const pluginConfig = getPluginConfig(strapi);
 
   /** @type {string | null} */
-  const apiToken = pluginConfig("apiToken");
+  const sites = pluginConfig("sites");
 
-  return {
-    deployHook: pluginConfig("deployHook"),
-    apiToken: hideSensitiveInfo ? apiToken?.substring(0, 6) : apiToken,
-    appFilter: pluginConfig("appFilter"),
-    teamFilter: pluginConfig("teamFilter"),
-  };
+  return sites.map((site) => {
+    const apiToken = hideSensitiveInfo
+      ? site.apiToken?.substring(0, 6)
+      : site.apiToken;
+
+    return {
+      ...site,
+      apiToken,
+    };
+  });
 };
 
 /**

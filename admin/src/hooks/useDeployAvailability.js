@@ -11,7 +11,7 @@ import { deployAvailability } from "../utils/api";
  * Fetch and return the availability of the deploy features
  * @returns {[Boolean, DeployAvailability, ApiErrorType?]} [isLoading, availability, apiError]
  */
-export function useDeployAvailability() {
+export function useDeployAvailability(selectedSite) {
   /** @type {DeployAvailability} */
   const initialAvailability = {};
   const [availability, setAvailability] = useState(initialAvailability);
@@ -21,26 +21,28 @@ export function useDeployAvailability() {
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(true);
 
   useEffect(() => {
-    deployAvailability()
-      .then((response) => {
-        setAvailability(response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "[vercel-deploy] error while retrieving availability",
-          error
-        );
-        setAvailability({});
-        if (error && error.response && error.response.status === 403) {
-          setApiError("FORBIDDEN");
-        } else {
-          setApiError("GENERIC_ERROR");
-        }
-      })
-      .finally(() => {
-        setIsLoadingAvailability(false);
-      });
-  }, [setIsLoadingAvailability, setAvailability]);
+    if (selectedSite && selectedSite["appFilter"]) {
+      deployAvailability(selectedSite)
+        .then((response) => {
+          setAvailability(response.data);
+        })
+        .catch((error) => {
+          console.error(
+            "[vercel-deploy] error while retrieving availability",
+            error
+          );
+          setAvailability({});
+          if (error && error.response && error.response.status === 403) {
+            setApiError("FORBIDDEN");
+          } else {
+            setApiError("GENERIC_ERROR");
+          }
+        })
+        .finally(() => {
+          setIsLoadingAvailability(false);
+        });
+    }
+  }, [setIsLoadingAvailability, setAvailability, selectedSite]);
 
   return [isLoadingAvailability, availability, apiError];
 }
