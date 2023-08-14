@@ -31,7 +31,7 @@ const containsNonFinalState = (deployments) => {
  * @param {DeploymentsFetched} onDeploymentsFetched
  * @returns {[Boolean, Deployment[], Boolean]} [isLoading, deployments, hasError]
  */
-export function useDeployments(usePolling, onDeploymentsFetched) {
+export function useDeployments(selectedSite, usePolling, onDeploymentsFetched) {
   /** @type {Deployment[]} */
   const initialDeployments = [];
   const [deployments, setDeployments] = useState(initialDeployments);
@@ -46,7 +46,7 @@ export function useDeployments(usePolling, onDeploymentsFetched) {
   };
 
   const fetchDeployments = () => {
-    getDeployments()
+    getDeployments(selectedSite)
       .then((response) => {
         setDeployments(response.deployments);
         triggerCallback(response.deployments);
@@ -66,7 +66,7 @@ export function useDeployments(usePolling, onDeploymentsFetched) {
   };
 
   useEffect(() => {
-    if (!usePolling) {
+    if (!usePolling && selectedSite) {
       fetchDeployments();
     }
   }, [
@@ -74,6 +74,7 @@ export function useDeployments(usePolling, onDeploymentsFetched) {
     setIsLoadingDeployments,
     usePolling,
     onDeploymentsFetched,
+    selectedSite,
   ]);
 
   const delay = usePolling ? INTERVAL_DELAY : null;

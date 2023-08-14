@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 
 import { Box } from "@strapi/design-system/Box";
 import { BaseHeaderLayout } from "@strapi/design-system/Layout";
@@ -17,8 +17,10 @@ import SymmetricBox from "../../components/SymmetricBox";
 import DeployButton from "../../components/DeployButton";
 import DeploymentsContainer from "../../components/DeploymentsContainer";
 import DeploymentsEmptyState from "../../components/DeploymentsEmptyState";
+import SitePicker from "../../components/SitePicker";
 import { useDeployAvailability } from "../../hooks/useDeployAvailability";
 import { useFormattedMessage } from "../../hooks/useFormattedMessage";
+import { getSites } from "../../utils/getSites";
 
 /**
  * @typedef {import('../../../../types/typedefs').DeploymentsFetched} DeploymentsFetched
@@ -55,17 +57,25 @@ const HomePage = () => {
   const headerTitle = useFormattedMessage("home-page.header.title");
   const headerSubtitle = useFormattedMessage("home-page.header.subtitle");
 
-  const [isLoadingAvailability, availability, apiError] =
-    useDeployAvailability();
-
   const [useDeploymentsPolling, setUseDeploymentsPolling] = useState(false);
+  const [sites, setSites] = useState([]);
+  const [selectedSite, setSelectedSite] = useState({});
+  const [isLoadingAvailability, availability, apiError] =
+    useDeployAvailability(selectedSite);
+
+  useEffect(async () => {
+    const sitesFromConfig = await getSites();
+    setSites(sitesFromConfig);
+    setSelectedSite(sitesFromConfig[0]);
+  }, []);
+
   /** @type {DeploymentsFetched} */
   const onDeploymentsFetched = (hasNonFinalState) => {
     // I want to keep fetching deployments if there is a deployment in progress until it finishes
     setUseDeploymentsPolling(hasNonFinalState);
   };
 
-  if (isLoadingAvailability) {
+  if (isLoadingAvailability && !selectedSite) {
     return <LoadingIndicatorPage />;
   }
 
@@ -87,9 +97,16 @@ const HomePage = () => {
           }
           primaryAction={
             <DeployButton
+              selectedSite={selectedSite}
               availabilityApiError={apiError}
               runDeployAvailability={availability?.runDeploy}
               onDeployed={onDeployed}
+            />
+          }
+          secondaryAction={
+            <SitePicker
+              selectedSite={selectedSite}
+              setSelectedSite={setSelectedSite}
             />
           }
           title={headerTitle}
@@ -100,6 +117,7 @@ const HomePage = () => {
       <SymmetricBox paddingHorizontal={10} paddingVertical={2}>
         {canListDeploy ? (
           <DeploymentsContainer
+            selectedSite={selectedSite}
             usePolling={useDeploymentsPolling}
             onDeploymentsFetched={onDeploymentsFetched}
           />

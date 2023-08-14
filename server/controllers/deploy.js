@@ -5,7 +5,7 @@ module.exports = {
     const response = await strapi
       .plugin("vercel-deploy")
       .service("deploy")
-      .runDeploy();
+      .runDeploy(ctx.req.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);
@@ -17,7 +17,7 @@ module.exports = {
     const response = await strapi
       .plugin("vercel-deploy")
       .service("deploy")
-      .getDeployments();
+      .getDeployments(ctx.req.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);
@@ -29,7 +29,7 @@ module.exports = {
     const response = strapi
       .plugin("vercel-deploy")
       .service("deploy")
-      .deployAvailability();
+      .deployAvailability(ctx.req.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);

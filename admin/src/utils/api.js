@@ -12,9 +12,12 @@ import pluginId from "../pluginId";
  * Start a deploy
  * @returns {Promise<RunDeployResponse>}
  */
-export const runDeploy = async () => {
+export const runDeploy = async (selectedSite) => {
   try {
-    const data = await axios(`/${pluginId}/deploy/run`, { method: "GET" });
+    const data = await axios(
+      `/${pluginId}/deploy/run?site=${selectedSite["appFilter"]}`,
+      { method: "GET" }
+    );
     return data.data;
   } catch (error) {
     console.error("[vercel-deploy] Error while running a deploy -", error);
@@ -40,9 +43,12 @@ export const getConfig = async () => {
  * Fetch and return Deployments info
  * @returns {Promise<GetDeploymentsResponse>}
  */
-export const getDeployments = async () => {
+export const getDeployments = async (selectedSite) => {
   try {
-    const response = await axios(`/${pluginId}/deploy/list`, { method: "GET" });
+    const response = await axios(
+      `/${pluginId}/deploy/list?site=${selectedSite["appFilter"]}`,
+      { method: "GET" }
+    );
     return response.data;
   } catch (error) {
     console.error(
@@ -57,11 +63,14 @@ export const getDeployments = async () => {
  * Fetch the availability for each deploy feature
  * @returns {Promise<DeployAvailabilityResponse>}
  */
-export const deployAvailability = async () => {
+export const deployAvailability = async (selectedSite) => {
   try {
-    const response = await axios(`/${pluginId}/deploy/availability`, {
-      method: "GET",
-    });
+    const response = await axios(
+      `/${pluginId}/deploy/availability?site=${selectedSite["appFilter"]}`,
+      {
+        method: "GET",
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(
