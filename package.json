@@ -1,24 +1,20 @@
 {
-  "name": "strapi-plugin-vercel-deploy",
+  "name": "strapi-plugin-multi-site-vercel-deploy",
   "version": "2.0.0",
-  "description": "Strapi v4 plugin to trigger and monitor a deployment on Vercel",
-  "repository": "https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy.git",
-  "bugs": {
-    "url": "https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/issues"
-  },
-  "homepage": "https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy#readme",
-  "author": "gianlucaparadise <gianlucaparadise@gmail.com>",
+  "description": "Strapi v4 plugin to trigger and monitor deployment of multiple applications on Vercel",
+  "repository": "https://github.com/code-mancers/strapi-plugin-multi-site-vercel-deploy.git",
+  "author": "Sujay Prabhu <sujay@codemancers.com>",
   "license": "MIT",
   "strapi": {
-    "name": "vercel-deploy",
+    "name": "multi-site-vercel-deploy",
     "displayName": "Vercel Deploy",
-    "description": "Plugin to trigger the deploy of a website hosted on Vercel.",
+    "description": "Plugin to trigger the deploy of multiple websites hosted on Vercel.",
     "kind": "plugin"
   },
   "maintainers": [
     {
-      "name": "Gianluca Paradiso",
-      "email": "gianlucaparadise@gmail.com"
+      "name": "Sujay Prabhu",
+      "email": "sujay@codemancers.com"
     }
   ],
   "publishConfig": {
