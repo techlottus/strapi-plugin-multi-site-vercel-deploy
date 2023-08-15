@@ -6,7 +6,7 @@ module.exports = [
     path: "/deploy/run",
     handler: "deploy.runDeploy",
     config: {
-      policies: [`plugin::${pluginId}.checkConfigRoles`],
+      policies: [],
     },
   },
   {
@@ -14,7 +14,7 @@ module.exports = [
     path: "/config",
     handler: "config.getConfig",
     config: {
-      policies: [`plugin::${pluginId}.checkConfigRoles`],
+      policies: [],
     },
   },
   {
@@ -22,7 +22,7 @@ module.exports = [
     path: "/deploy/list",
     handler: "deploy.getDeployments",
     config: {
-      policies: [`plugin::${pluginId}.checkConfigRoles`],
+      policies: [],
     },
   },
   {
@@ -30,7 +30,7 @@ module.exports = [
     path: "/deploy/availability",
     handler: "deploy.deployAvailability",
     config: {
-      policies: [`plugin::${pluginId}.checkConfigRoles`],
+      policies: [],
     },
   },
 ];
