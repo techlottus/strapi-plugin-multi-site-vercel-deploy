@@ -1,7 +1,8 @@
-import pluginPkg from "../../package.json";
+const pluginPkg = require("../../package.json");
 
-const packageName = pluginPkg.name.split("/")[1];
+const pluginId = pluginPkg.strapi.name.replace(
+  /^(@[^-,.][\w,-]+\/|strapi-)plugin-/i,
+  ""
+);
 
-const pluginId = packageName.replace(/^(@[^-,.][\w,-]+\/|strapi-)plugin-/i, "");
-
-export default pluginId;
+module.exports = pluginId;
