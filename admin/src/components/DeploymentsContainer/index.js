@@ -7,6 +7,8 @@
 import React from "react";
 import { Loader } from "@strapi/design-system/Loader";
 import { Flex } from "@strapi/design-system/Flex";
+import { Box } from "@strapi/design-system/Box";
+import { Typography } from "@strapi/design-system/Typography";
 
 import { useDeployments } from "../../hooks/useDeployments";
 import DeploymentsEmptyState from "../DeploymentsEmptyState";
