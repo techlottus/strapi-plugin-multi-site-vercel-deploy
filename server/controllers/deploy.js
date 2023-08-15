@@ -3,9 +3,9 @@
 module.exports = {
   async runDeploy(ctx) {
     const response = await strapi
-      .plugin("vercel-deploy")
+      .plugin("multi-site-vercel-deploy")
       .service("deploy")
-      .runDeploy(ctx.req.site);
+      .runDeploy(ctx.request.query.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);
@@ -15,9 +15,9 @@ module.exports = {
   },
   async getDeployments(ctx) {
     const response = await strapi
-      .plugin("vercel-deploy")
+      .plugin("multi-site-vercel-deploy")
       .service("deploy")
-      .getDeployments(ctx.req.site);
+      .getDeployments(ctx.request.query.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);
@@ -27,9 +27,9 @@ module.exports = {
   },
   deployAvailability(ctx) {
     const response = strapi
-      .plugin("vercel-deploy")
+      .plugin("multi-site-vercel-deploy")
       .service("deploy")
-      .deployAvailability(ctx.req.site);
+      .deployAvailability(ctx.request.query.site);
 
     if (response.error) {
       return ctx.internalServerError(`Server error: ${response.error}`);
