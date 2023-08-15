@@ -105,6 +105,7 @@ const HomePage = () => {
           }
           secondaryAction={
             <SitePicker
+              sites={sites}
               selectedSite={selectedSite}
               setSelectedSite={setSelectedSite}
             />

@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
-import getSites from "../../utils/getSites";
+import React from "react";
 import { Select, Option } from "@strapi/design-system/Select";
 
-const SitePicker = ({ selectedSite, setSelectedSite }) => {
-  const [sites, setSites] = useState([]);
-
-  useEffect(() => {
-    getSites().then((sites) => setSites(sites));
-  }, []);
-
+const SitePicker = ({ sites, selectedSite, setSelectedSite }) => {
   const handleChange = (value) => {
     if (value === selectedSite.appFilter) return;
 
