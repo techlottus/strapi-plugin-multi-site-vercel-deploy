@@ -1,8 +1,8 @@
 {
-  "vercel-deploy.plugin.name": "Vercel Deploy",
+  "multi-site-vercel-deploy.plugin.name": "Vercel Deploy",
 
-  "vercel-deploy-settings.links-header": "Vercel Deploy",
-  "vercel-deploy-settings.link-configuration-label": "Configuration",
+  "multi-site-vercel-deploy-settings.links-header": "Vercel Deploy",
+  "multi-site-vercel-deploy-settings.link-configuration-label": "Configuration",
 
   "home-page.header.title": "Vercel Deploy",
   "home-page.header.subtitle": "Manual deploy - Start a deployment on Vercel using the webhook you configured",
