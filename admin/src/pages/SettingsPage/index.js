@@ -17,6 +17,8 @@ import {
 } from "@strapi/design-system/Field";
 import { Loader } from "@strapi/design-system/Loader";
 import { Flex } from "@strapi/design-system/Flex";
+import { Typography } from "@strapi/design-system/Typography";
+import { Divider } from "@strapi/design-system";
 
 import DeploymentsEmptyState from "../../components/DeploymentsEmptyState";
 import { getConfig } from "../../utils/api";
@@ -123,104 +125,112 @@ const SettingsContainer = () => {
 
   return (
     <>
-      <BoxField
-        fieldName="vercel-deploy-hook"
-        fieldHint={
-          <>
-            <FormattedMessage labelId="settings-page.deploy-hook.learn-more-intro" />
-            <ExternalLink href="https://vercel.com/docs/git/deploy-hooks">
-              <FormattedMessage labelId="settings-page.deploy-hook.learn-more-link-text" />
-            </ExternalLink>
-          </>
-        }
-      >
-        <Stack>
-          <FieldLabel required>
-            <FormattedMessage labelId="settings-page.deploy-hook.label" />
-          </FieldLabel>
-          <FieldInput
-            type="text"
-            placeholder={deployHookPlaceholder}
-            value={deployHook}
-            disabled={true}
-          />
-          <FieldHint />
-        </Stack>
-      </BoxField>
-      <BoxField
-        fieldName="vercel-deploy-api-token"
-        fieldHint={
-          <>
-            <FormattedMessage labelId="settings-page.api-token.learn-more-intro" />
-            <ExternalLink href="https://vercel.com/account/tokens">
-              <FormattedMessage labelId="settings-page.api-token.learn-more-link-text" />
-            </ExternalLink>
-          </>
-        }
-      >
-        <Stack>
-          <FieldLabel required>
-            <FormattedMessage labelId="settings-page.api-token.label" />
-          </FieldLabel>
-          <FieldInput
-            type="text"
-            placeholder={apiTokenPlaceholder}
-            value={apiToken}
-            disabled={true}
-          />
-          <FieldHint />
-        </Stack>
-      </BoxField>
-      <BoxField
-        fieldName="vercel-deploy-app-name"
-        fieldHint={
-          <>
-            <FormattedMessage labelId="settings-page.app-name.learn-more-intro" />
-            <ExternalLink href="https://vercel.com/dashboard">
-              <FormattedMessage labelId="settings-page.app-name.learn-more-link-text" />
-            </ExternalLink>
-            <FormattedMessage labelId="settings-page.app-name.learn-more-outro" />
-          </>
-        }
-      >
-        <Stack>
-          <FieldLabel>
-            <FormattedMessage labelId="settings-page.app-name.label" />
-          </FieldLabel>
-          <FieldInput
-            type="text"
-            placeholder={appNamePlaceholder}
-            value={appFilter}
-            disabled={true}
-          />
-          <FieldHint />
-        </Stack>
-      </BoxField>
-      <BoxField
-        fieldName="vercel-deploy-team-id"
-        fieldHint={
-          <>
-            <FormattedMessage labelId="settings-page.team-id.learn-more-intro" />
-            <ExternalLink href="https://vercel.com/dashboard">
-              <FormattedMessage labelId="settings-page.team-id.learn-more-link-text" />
-            </ExternalLink>
-            <FormattedMessage labelId="settings-page.team-id.learn-more-outro" />
-          </>
-        }
-      >
-        <Stack>
-          <FieldLabel>
-            <FormattedMessage labelId="settings-page.team-id.label" />
-          </FieldLabel>
-          <FieldInput
-            type="text"
-            placeholder={teamIdPlaceholder}
-            value={teamFilter}
-            disabled={true}
-          />
-          <FieldHint />
-        </Stack>
-      </BoxField>
+      {pluginConfig.map((config) => (
+        <>
+          <BoxField paddingTop={2} paddingLeft={4}>
+            <Typography variant="beta">{config.displayName}</Typography>
+          </BoxField>
+          <BoxField
+            fieldName="vercel-deploy-hook"
+            fieldHint={
+              <>
+                <FormattedMessage labelId="settings-page.deploy-hook.learn-more-intro" />
+                <ExternalLink href="https://vercel.com/docs/git/deploy-hooks">
+                  <FormattedMessage labelId="settings-page.deploy-hook.learn-more-link-text" />
+                </ExternalLink>
+              </>
+            }
+          >
+            <Stack>
+              <FieldLabel required>
+                <FormattedMessage labelId="settings-page.deploy-hook.label" />
+              </FieldLabel>
+              <FieldInput
+                type="text"
+                placeholder={deployHookPlaceholder}
+                value={config.deployHook}
+                disabled={true}
+              />
+              <FieldHint />
+            </Stack>
+          </BoxField>
+          <BoxField
+            fieldName="vercel-deploy-api-token"
+            fieldHint={
+              <>
+                <FormattedMessage labelId="settings-page.api-token.learn-more-intro" />
+                <ExternalLink href="https://vercel.com/account/tokens">
+                  <FormattedMessage labelId="settings-page.api-token.learn-more-link-text" />
+                </ExternalLink>
+              </>
+            }
+          >
+            <Stack>
+              <FieldLabel required>
+                <FormattedMessage labelId="settings-page.api-token.label" />
+              </FieldLabel>
+              <FieldInput
+                type="text"
+                placeholder={apiTokenPlaceholder}
+                value={config.apiToken}
+                disabled={true}
+              />
+              <FieldHint />
+            </Stack>
+          </BoxField>
+          <BoxField
+            fieldName="vercel-deploy-app-name"
+            fieldHint={
+              <>
+                <FormattedMessage labelId="settings-page.app-name.learn-more-intro" />
+                <ExternalLink href="https://vercel.com/dashboard">
+                  <FormattedMessage labelId="settings-page.app-name.learn-more-link-text" />
+                </ExternalLink>
+                <FormattedMessage labelId="settings-page.app-name.learn-more-outro" />
+              </>
+            }
+          >
+            <Stack>
+              <FieldLabel>
+                <FormattedMessage labelId="settings-page.app-name.label" />
+              </FieldLabel>
+              <FieldInput
+                type="text"
+                placeholder={appNamePlaceholder}
+                value={config.appFilter}
+                disabled={true}
+              />
+              <FieldHint />
+            </Stack>
+          </BoxField>
+          <BoxField
+            fieldName="vercel-deploy-team-id"
+            fieldHint={
+              <>
+                <FormattedMessage labelId="settings-page.team-id.learn-more-intro" />
+                <ExternalLink href="https://vercel.com/dashboard">
+                  <FormattedMessage labelId="settings-page.team-id.learn-more-link-text" />
+                </ExternalLink>
+                <FormattedMessage labelId="settings-page.team-id.learn-more-outro" />
+              </>
+            }
+          >
+            <Stack>
+              <FieldLabel>
+                <FormattedMessage labelId="settings-page.team-id.label" />
+              </FieldLabel>
+              <FieldInput
+                type="text"
+                placeholder={teamIdPlaceholder}
+                value={config.teamFilter}
+                disabled={true}
+              />
+              <FieldHint />
+            </Stack>
+          </BoxField>
+          <Divider />
+        </>
+      ))}
     </>
   );
 };
