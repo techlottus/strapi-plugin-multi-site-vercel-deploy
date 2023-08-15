@@ -21,7 +21,7 @@ export function useDeployAvailability(selectedSite) {
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(true);
 
   useEffect(() => {
-    if (selectedSite && selectedSite["appFilter"]) {
+    if (selectedSite && selectedSite.appFilter) {
       deployAvailability(selectedSite)
         .then((response) => {
           setAvailability(response.data);

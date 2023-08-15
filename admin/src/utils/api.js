@@ -15,7 +15,7 @@ import pluginId from "../pluginId";
 export const runDeploy = async (selectedSite) => {
   try {
     const data = await axios(
-      `/${pluginId}/deploy/run?site=${selectedSite["appFilter"]}`,
+      `/${pluginId}/deploy/run?site=${selectedSite.appFilter}`,
       { method: "GET" }
     );
     return data.data;
@@ -46,7 +46,7 @@ export const getConfig = async () => {
 export const getDeployments = async (selectedSite) => {
   try {
     const response = await axios(
-      `/${pluginId}/deploy/list?site=${selectedSite["appFilter"]}`,
+      `/${pluginId}/deploy/list?site=${selectedSite.appFilter}`,
       { method: "GET" }
     );
     return response.data;
@@ -66,7 +66,7 @@ export const getDeployments = async (selectedSite) => {
 export const deployAvailability = async (selectedSite) => {
   try {
     const response = await axios(
-      `/${pluginId}/deploy/availability?site=${selectedSite["appFilter"]}`,
+      `/${pluginId}/deploy/availability?site=${selectedSite.appFilter}`,
       {
         method: "GET",
       }
