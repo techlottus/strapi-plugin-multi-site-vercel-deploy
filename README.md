@@ -1,4 +1,4 @@
-# Vercel Deploy
+# Multiple Site Vercel Deployments
 
 <!-- [![npm version](https://badge.fury.io/js/strapi-plugin-vercel-deploy.svg)](https://badge.fury.io/js/strapi-plugin-vercel-deploy)
 [![strapi market link](https://img.shields.io/badge/strapi-v4-blueviolet)](https://market.strapi.io/plugins/strapi-plugin-vercel-deploy) -->
@@ -11,11 +11,11 @@ Strapi v4 plugin to trigger and monitor a deployment on Vercel.
 
 Home Page:
 
-![Plugin Home Page](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-home.png "Plugin Home Page")
+![Plugin Home Page](https://github.com/code-mancers/strapi-plugin-multi-site-vercel-deploy/raw/main/assets/strapi-multi-site-vercel-deploy-home.png "Plugin Home Page")
 
-<!-- Settings Page:
+Settings Page:
 
-![Plugin Settings Page](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-settings.png "Plugin Settings Page") -->
+![Plugin Settings Page](https://github.com/code-mancers/strapi-plugin-multi-site-vercel-deploy/raw/main/assets/strapi-multi-site-vercel-deploy-settings.png "Plugin Settings Page")
 
 ## Installation
 
@@ -24,9 +24,9 @@ Home Page:
 Run the following command in your Strapi project to install vercel-deploy:
 
 ```shell
-yarn add strapi-plugin-multi-site-vercel-deploy
+yarn add @code-mancers/strapi-plugin-multi-site-vercel-deploy
 # or
-npm i -S strapi-plugin-multi-site-vercel-deploy
+npm i -S @code-mancers/strapi-plugin-multi-site-vercel-deploy
 ```
 
 ### Enable plugin configuration
@@ -63,7 +63,7 @@ Example:
 
 ```js
 module.exports = ({ env }) => ({
-  "vercel-deploy": {
+  "multi-site-vercel-deploy": {
     enabled: true,
     config: {
       sites: [
@@ -74,7 +74,6 @@ module.exports = ({ env }) => ({
           appFilter: "your-app-name-on-vercel",
           teamFilter: "your-team-id-on-vercel",
           displayName: "app-name-to-be-displayed-in-dropdown",
-          roles: ["strapi-super-admin", "strapi-editor", "strapi-author"],
         },
       ],
     },
@@ -100,9 +99,9 @@ The plugin is reading the following configuration variables to work:
 
   - Set the id of your [Vercel Team](https://vercel.com/dashboard) to see only the deployments you need
 
-- `roles`: List of user roles that can use the plugin
+<!-- - `roles`: List of user roles that can use the plugin
 
-  - Any user with at least one of the specified roles can use the plugin. If the list is empty or undefined, any user can use the plugin.
+  - Any user with at least one of the specified roles can use the plugin. If the list is empty or undefined, any user can use the plugin. -->
 
 ### Environment Configuration
 
@@ -110,7 +109,7 @@ You shouldn't disclose the api token and the deploy hook url for security reason
 
 ```js
 module.exports = ({ env }) => ({
-  "vercel-deploy": {
+  "multi-site-vercel-deploy": {
     enabled: true,
     config: {
       sites: [
@@ -120,7 +119,6 @@ module.exports = ({ env }) => ({
           appFilter: process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER,
           teamFilter: process.env.VERCEL_DEPLOY_PLUGIN_TEAM_FILTER,
           displayName: process.env.VERCEL_DEPLOY_PLUGIN_DISPLAY_NAME,
-          roles: ["strapi-super-admin"],
         },
       ],
     },
