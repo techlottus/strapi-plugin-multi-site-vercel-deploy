@@ -78,7 +78,7 @@ const DeployButton = ({
 
   useEffect(() => {
     const hasDeployedSuccessfully = deployErrorState === "AVAILABLE";
-    if (!hasDeployedSuccessfully) {
+    if (!hasDeployedSuccessfully && deployErrorState) {
       const notification = getErrorNotification(deployErrorState);
       toggleNotification(notification);
     }
