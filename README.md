@@ -1,11 +1,12 @@
 # Multiple Site Vercel Deployments
 
-<!-- [![npm version](https://badge.fury.io/js/strapi-plugin-vercel-deploy.svg)](https://badge.fury.io/js/strapi-plugin-vercel-deploy)
-[![strapi market link](https://img.shields.io/badge/strapi-v4-blueviolet)](https://market.strapi.io/plugins/strapi-plugin-vercel-deploy) -->
+[![npm version](https://badge.fury.io/js/@code-mancers%2Fstrapi-plugin-multi-site-vercel-deploy.svg)](https://badge.fury.io/for/js/@code-mancers/strapi-plugin-multi-site-vercel-deploy)
 
-Strapi v4 plugin to trigger and monitor a deployment on Vercel.
+<!-- [![strapi market link](https://img.shields.io/badge/strapi-v4-blueviolet)](https://market.strapi.io/plugins/strapi-plugin-vercel-deploy) -->
 
-![Vercel Deploy Logo](https://github.com/gianlucaparadise/strapi-plugin-vercel-deploy/raw/main/assets/strapi-vercel-deploy-logo.png "Vercel Deploy Logo")
+Strapi v4 plugin to trigger and monitor multiple sites deployment on Vercel.
+
+![Vercel Deploy Logo](https://github.com/code-mancers/strapi-plugin-multi-site-vercel-deploy/raw/main/assets/strapi-multi-site-vercel-deploy-plugin-logo.png "Vercel Deploy Logo")
 
 ## Plugin Preview
 
